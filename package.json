@@ -1,0 +1,23 @@
+{
+  "name": "pricing",
+  "version": "1.0.0",
+  "description": "pricing kata",
+  "main": "main.js",
+  "dependencies": {
+    "jasmine": "^2.5.2",
+    "jasmine-node": "^1.14.5"
+  },
+  "devDependencies": {
+    "jasmine": "^2.5.2",
+    "jasmine-node": "^1.14.5"
+  },
+  "scripts": {
+    "test": "jasmine-node spec"
+  },
+  "keywords": [
+    "pricing",
+    "kata"
+  ],
+  "author": "OS",
+  "license": "ISC"
+}
