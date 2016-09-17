@@ -2,24 +2,27 @@ require('jasmine')
 
 describe("Given a shopping list of items, each having a different price", function () {
 
-    let list = require("../app/shopping-cart.js")
+    let ShoppingList = require("../app/shopping-cart.js")
+    let item = require("../app/item.js")
     let shoppingList
 
-    describe("And there's no applicable tax for any item in the cart (it's Food)", function () {
+    describe("And the total price of all items is less than $100 (so, no discount)", function () {
 
-        describe("and the total price of all items is less than $100", function () {
-            let item = require("../app/item.js")
-
-            it("the cost is the price of the one item in the list", function () {
-                shoppingList = new list(new item.Food(100))
-                expect(shoppingList.cost()).toBe(100)
-            })
-
-            it("the cost is the sum of the price of all (Food) items in the list", function () {
-                shoppingList = new list(new item.Food(100), new item.Food(9899))
+        describe("When every item is Food, there's no applicable sales tax)", function () {
+            it("adds up the price of every item to determine the cost", function () {
+                let firstItem = new item.Food(100)
+                let secondItem = new item.Food(9899)
+                shoppingList = new ShoppingList(firstItem, secondItem)
                 expect(shoppingList.cost()).toBe(9999)
             })
 
+        })
+
+        describe("When the shopping list includes items that are taxed", function () {
+            it("applies tax to taxable items, according to their tax rate, and adds that to the total cost", function () {
+                shoppingList = new ShoppingList(new item.Food(100), new item.Other(1000), new item.Alcohol(1000))
+                expect(shoppingList.cost()).toBe(2260)
+            })
         })
     })
 })

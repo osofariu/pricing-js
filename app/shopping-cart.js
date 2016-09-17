@@ -6,7 +6,8 @@ class ShoppingList {
     cost() {
         let sumPrices = 0
         for (let i = 0; i < this.items.length; i++) {
-            sumPrices += this.items[i].price
+            let currentItem = this.items[i]
+            sumPrices += currentItem.price() + currentItem.tax()
         }
         return sumPrices
     }
