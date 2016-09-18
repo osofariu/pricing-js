@@ -3,16 +3,17 @@
  */
 
 class Item {
-    constructor(_price, tax_rate) {
-        this.itemPrice = _price
+    constructor(price, tax_rate) {
+        this.price = price
         this.taxRate = tax_rate
     }
-    price() {
-        return this.itemPrice
+    itemPrice() {
+        return this.price
     }
 
-    tax() {
-        return this.taxRate * this.itemPrice / 100
+    discountedTaxedPrice(discount) {
+        let discountedPrice = this.price - (this.price * discount)
+        return discountedPrice + (this.taxRate * discountedPrice)
     }
 }
 
@@ -24,14 +25,13 @@ class Food extends Item {
 
 class Other extends Item {
     constructor(price) {
-        super(price, 7.5)
+        super(price, 0.075)
     }
 }
 
-
 class Alcohol extends Item {
     constructor(price) {
-        super(price, 8.5)
+        super(price, 0.085)
     }
 }
 

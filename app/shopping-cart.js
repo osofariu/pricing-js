@@ -4,9 +4,18 @@ class ShoppingList {
     }
 
     cost() {
-        return this.items.map( item => {
-            return item.price() + item.tax()
-        }).reduce((a, b) => a + b, 0);
+        let discountToApply = discountPercentage(this.items.map(item => item.itemPrice()).reduce((acc, x) => acc + x, 0))
+        return this.items.map(item => item.discountedTaxedPrice(discountToApply)).reduce((acc, x) => acc + x, 0)
+    }
+}
+
+function discountPercentage(rawPrice) {
+    if (rawPrice >= 100000) {
+        return .15
+    } else if (rawPrice >= 10000) {
+        return .1
+    } else {
+        return 0
     }
 }
 
