@@ -8,7 +8,7 @@ describe("Given a shopping cart", function () {
     let shoppingCart = []
     describe("And the total itemPrice of all items is less than $100 (so, no discount)", function () {
 
-        describe("When every item is Food, there's no applicable sales tax)", function () {
+        describe("When every item is Food, there's no applicable sales tax", function () {
 
             it("adds up the price of every item to determine the cost", function () {
                 shoppingCart = new ShoppingCart(new Item.Food(100), new Item.Food(9899))
@@ -47,6 +47,7 @@ describe("Given a shopping cart", function () {
                 shoppingCart = new ShoppingCart(new Item.Food(10000), new Item.Other(10000))
                 expect(shoppingCart.cost()).toBe(9000 + (9000 + 0.075 * 9000))
             })
+            
             it("Applies 15% discount when pre-tax total is greater than $100, but less than $1000, then applies applicable tax", function () {
                 shoppingCart = new ShoppingCart(new Item.Food(100000), new Item.Alcohol(100000))
                 expect(shoppingCart.cost()).toBe(85000 + (85000 + 0.085 * 85000))
