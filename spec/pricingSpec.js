@@ -6,11 +6,11 @@ describe("Given a shopping cart", function () {
     let Item = require("../app/item.js")
 
     let shoppingCart = []
-    describe("And the total itemPrice of all items is less than $100 (so, no discount)", function () {
+    describe("And the total price of all items is less than $100 (so, no discount)", function () {
 
         describe("When every item is Food, there's no applicable sales tax", function () {
 
-            it("adds up the price of every item to determine the cost", function () {
+            it("adds up the itemPrice of every item to determine the cost", function () {
                 shoppingCart = new ShoppingCart(new Item.Food(100), new Item.Food(9899))
                 expect(shoppingCart.cost()).toBe(9999)
             })
@@ -26,7 +26,7 @@ describe("Given a shopping cart", function () {
         })
     })
 
-    describe("But when the total itemPrice of all items is at least $100", function() {
+    describe("But when the total price of all items is at least $100", function() {
 
         describe("And all items in the cart are of type Food, it applies a discount (but no tax)", function () {
 

@@ -1,18 +1,14 @@
-/**
- * Created by ovi on 9/17/16.
- */
-
 class Item {
     constructor(price, tax_rate) {
-        this.price = price
+        this.itemPrice = price
         this.taxRate = tax_rate
     }
-    itemPrice() {
-        return this.price
+    get price() {
+        return this.itemPrice
     }
 
-    discountedTaxedPrice(discount) {
-        let discountedPrice = this.price - (this.price * discount)
+    taxedPriceGivenDiscount(discount) {
+        let discountedPrice = this.itemPrice - (this.itemPrice * discount)
         return discountedPrice + (this.taxRate * discountedPrice)
     }
 }
@@ -35,4 +31,4 @@ class Alcohol extends Item {
     }
 }
 
-module.exports = { Item, Food, Other, Alcohol}
+module.exports = {Item, Food, Other, Alcohol}

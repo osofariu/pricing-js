@@ -1,12 +1,24 @@
-class ShoppingList {
+class ShoppingCart {
     constructor(...items) {
         this.items = items
     }
 
     cost() {
-        let discountToApply = discountPercentage(this.items.map(item => item.itemPrice()).reduce((acc, x) => acc + x, 0))
-        return this.items.map(item => item.discountedTaxedPrice(discountToApply)).reduce((acc, x) => acc + x, 0)
+        let discountToApply = discountPercentage(sumOfItemPrices(this.items))
+        return sumOfTaxedPricesGivenDiscount(this.items, discountToApply)
     }
+}
+
+function sumOfItemPrices(items) {
+    return items.map(item => item.price).sum()
+}
+
+function sumOfTaxedPricesGivenDiscount(items, discount) {
+    return items.map(item => item.taxedPriceGivenDiscount(discount)).sum()
+}
+
+Array.prototype.sum = function() {
+    return this.reduce((acc, x) => acc + x, 0)
 }
 
 function discountPercentage(rawPrice) {
@@ -19,4 +31,4 @@ function discountPercentage(rawPrice) {
     }
 }
 
-module.exports = ShoppingList
+module.exports = ShoppingCart
